@@ -1,16 +1,21 @@
 {
-  "userID": "2A3",
-  "name": "Сотрудник с сервера",
-  "department": "Отдел Д-1",
-  "online": true,
-  "email": "super@mail.ru",
-  "phone": "122",
-  "position": "Разработчик",
-  "manager": "Боровских Илья Юрьевич",
-  "img": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  "project": ["ТМХ-VIP "],
-  "place": "A250",
-  "office": "ИКЦ-2",
-  "PC_number": "A250",
-  "monitors": 2
+  "res" : [
+    {
+      "userID": "2A3",
+      "name": "Сотрудник с сервера",
+      "department": "Отдел Д-1",
+      "online": true,
+      "email": "super@mail.ru",
+      "phone": "122",
+      "position": "Разработчик",
+      "manager": "Боровских Илья Юрьевич",
+      "img": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+      "project": ["ТМХ-VIP "],
+      "place": "2A3",
+      "office": "ИКЦ-2",
+      "PC_number": "A250",
+      "monitors": 2
+    }
+    
+  ]
 }

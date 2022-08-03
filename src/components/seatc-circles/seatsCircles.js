@@ -5,15 +5,15 @@ import { BigCircle } from "../user-circle/userCircle";
 
 //import { useSelector } from "react-redux";
 
-const SeatsCircles = ({ areas, showUserCard }) => {
+const SeatsCircles = ({ areas, showUserCard, activeFloorAndUser }) => {
   const [isCircleVisible, setIsCircleVisible] = React.useState(false);
   const [circleInfo, setCircleInfo] = React.useState(null);
 
-  // const isCircleVisible = useSelector(
-  //   (state) => state.userCircle.isCircleVisible
-  // );
+  //const userId = useSelector((state) => state.userCircle.userId);
 
-  // console.log({ isCircleVisible });
+  // const { userById, setUserById } = useUserInfo();
+  console.log(areas);
+  // console.log(setUserInfo);
 
   const mapperAreaMouseEnterHandler = async (item) => {
     setCircleInfo({ ...item, size: 78 });

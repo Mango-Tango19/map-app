@@ -9,8 +9,13 @@ import Box from "@mui/material/Box";
 import Map from "./components/map/map";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import { userCircleSliceActions } from "./store/user-slice";
+import { actions } from "./store/user-slice";
 import useUserInfo from "./useUserInfo";
+//import useUserInfo from "./useUserInfo";
+
+import Service from "./service";
+
+const service = new Service();
 
 const App = () => {
   const theme = createTheme({
@@ -35,9 +40,10 @@ const App = () => {
       },
     },
   });
+
   const [activeFloorAndUser, setActiveFloorAndUser] = useState(null);
 
-  const [userDataFromSearch, setUserDataFromSearch] = useState("2");
+  const [userDataFromSearch, setUserDataFromSearch] = useState(null);
 
   const [activeFloorFromClick, setFloorFromClick] = useState(null);
 
@@ -45,47 +51,28 @@ const App = () => {
 
   const [userInfo, setUserInfo] = useState(null);
 
-  // const { userInfo, setUserInfo } = useUserInfo();
-  // console.log(userInfo);
-  // console.log(setUserInfo);
+  const dispatch = useDispatch();
 
-  //const dispatch = useDispatch();
+  const { setUrerById, userById } = useUserInfo();
+
+  const getUserInfo = (id) => {
+    let res = service.getUserById(id);
+    setUserInfo(res);
+  };
 
   const handleResultFromSearch = (result) => {
-    debugger;
-
     // console.log(result);Object { floor: "3", name: "Андрей Тормин", place: "2A3" }
-    // setFloorFromSearch(result?.floor);
     if (!result) return;
-    const data = {
-      userID: "A250",
-      name: result.name,
-      department: "Отдел Д-1",
-      online: true,
-      email: "super@mail.ru",
-      phone: "122",
-      position: "Разработчик",
-      manager: "Боровских Илья Юрьевич",
-      img: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      project: ["ТМХ-VIP "],
-      floor_coordinate: "A250",
-      office: "ИКЦ-2",
-      PC_number: "A250",
-      monitors: 2,
-    };
-
     setUserDataFromSearch(result);
-    setUserInfo(data);
-    //по id получить данные, совместить их с координатами и показать большой кружок на карте
-    //написать функцию для этого в сервисе
-
-    // const userData = getUserById(result)
-    // setUserInfo(data);
-    // setIsUserVisible(true);
-    // dispatch(userCircleSliceActions.setUserdata())
+    getUserInfo(result);
   };
+
   useEffect(() => {
+    if (!userDataFromSearch) return;
+    // userDataFromSearch { floor: "3", name: "Андрей Тормин", place: "2A3" }
     setActiveFloorAndUser(userDataFromSearch);
+
+    dispatch(actions.getUserId(userDataFromSearch.place));
   }, [userDataFromSearch]);
 
   const saveActiveFromClick = (name) => {
@@ -122,8 +109,6 @@ const App = () => {
 
   const showUserCard = (res) => {
     setUserInfo(res);
-    // getUserInfo(res.place)
-    // console.log(res);
   };
 
   return (
@@ -145,7 +130,6 @@ const App = () => {
                 destroyCard={destroyCard}
               />
               {userInfo ? <UserCard userInfo={userInfo} /> : <div></div>}
-
               <FloorBtnGroup
                 activeFloor={activeFloorAndUser?.floor}
                 saveActiveFromClick={saveActiveFromClick}

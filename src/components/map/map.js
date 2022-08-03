@@ -32,8 +32,8 @@ const service = new Service();
 //     ]
 // }
 
-const Mapper = ({ imageSrc, showUserCard, floorNumber }) => {
-  console.log(floorNumber);
+const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser }) => {
+  //console.log(activeFloorAndUser);
   const [areas, setAreas] = React.useState(null);
 
   const getAreas = async (floorNumber) => {
@@ -44,10 +44,10 @@ const Mapper = ({ imageSrc, showUserCard, floorNumber }) => {
   React.useEffect(() => {
     let mounted = true;
     if (mounted) {
-      getAreas(floorNumber);
+      getAreas(activeFloorAndUser?.floor);
     }
     return () => (mounted = false);
-  }, [floorNumber]);
+  }, [activeFloorAndUser?.floor]);
 
   const URL = imageSrc;
   const MAP = {

@@ -5,19 +5,18 @@ const service = new Service();
 
 export default function useUserInfo() {
   const getUserInfo = (id) => {
-    debugger;
     return service.getUSerInfo(id);
   };
 
-  const [userInfo, setUserInfo] = useState(null);
+  const [userById, setUserById] = useState(null);
 
-  const saveUserInfo = (id) => {
+  const seveUserById = (id) => {
     let res = getUserInfo(id);
-    setUserInfo(res);
+    setUserById(res);
   };
 
   return {
-    setUserInfo: saveUserInfo,
-    userInfo,
+    setUserById: seveUserById,
+    userById,
   };
 }
