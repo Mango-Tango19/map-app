@@ -27,22 +27,27 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function UserCard({ userInfo }) {
-  // const data = {
-  //   userID: "A250",
-  //   name: userInfo.title,
-  //   department: "Отдел Д-1",
-  //   online: true,
-  //   email: "super@mail.ru",
-  //   phone: "122",
-  //   position: "Разработчик",
-  //   manager: "Боровских Илья Юрьевич",
-  //   img: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  //   project: ["ТМХ-VIP "],
-  //   floor_coordinate: "A250",
-  //   office: "ИКЦ-2",
-  //   PC_number: "A250",
-  //   monitors: 2,
-  // };
+  ///userInfo
+  //get full info from service by id
+  // coords: (3) […]
+  // ​​
+  // fillColor: "transparent"
+  // ​​
+  // img: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+  // ​​
+  // isOnline: true
+  // ​​
+  // name: "Гиззатулин Азамат"
+  // ​​
+  // place: "2A1"
+  // ​​
+  // polygon: (1) […]
+  // ​​
+  // shape: "circle"
+  // ​​
+  // strokeColor: "rgba(0, 0, 0, 0.5)"
+  // ​​
+  // userID: "123"
   return (
     <Card
       sx={{
@@ -63,29 +68,29 @@ export default function UserCard({ userInfo }) {
           />
         }
         title={`${userInfo.name}`}
-        subheader={`${userInfo.position}`}
+        // subheader={`${userInfo?.position}`}
       />
       <CardContent sx={{ padding: "5px 15px" }}>
-        <Typography gutterBottom variant='body2' component='p'>
-          {userInfo.department}
-        </Typography>
+        {/* <Typography gutterBottom variant='body2' component='p'>
+          {userInfo?.department}
+        </Typography> */}
 
         <Stack spacing={1} mb={2}>
           <Box>
             <Typography variant='body2' component='p'>
               Руководитель
             </Typography>
-            <Typography variant='body2' color='text.secondary'>
-              {userInfo.manager}
-            </Typography>
+            {/* <Typography variant='body2' color='text.secondary'>
+              {userInfo?.manager}
+            </Typography> */}
           </Box>
           <Box>
             <Typography variant='body2' component='p'>
               Проект
             </Typography>
-            <Typography variant='body2' color='text.secondary'>
-              {userInfo.project[0]}
-            </Typography>
+            {/* <Typography variant='body2' color='text.secondary'>
+              {userInfo?.project[0]}
+            </Typography> */}
           </Box>
 
           {/* <Box>
@@ -116,18 +121,18 @@ export default function UserCard({ userInfo }) {
           </Box> */}
         </Stack>
 
-        <Typography variant='body2' color='text.secondary'>
-          Телефон: {userInfo.phone}
-        </Typography>
+        {/* <Typography variant='body2' color='text.secondary'>
+          Телефон: {userInfo?.phone}
+        </Typography> */}
 
         <Typography variant='body2' color='text.secondary' gutterBottom>
           Почта:{" "}
-          <Link
-            href={`mailto:${userInfo.email}`}
+          {/* <Link
+            href={`mailto:${userInfo?.email}`}
             sx={{ display: "inline-block", marginBottom: "10px" }}
           >
-            {userInfo.email}
-          </Link>
+            {userInfo?.email}
+          </Link> */}
         </Typography>
       </CardContent>
       <CardActions>

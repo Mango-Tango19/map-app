@@ -37,7 +37,7 @@ const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
           letterSpacing: "0,5px",
         }}
       >
-        {value}
+        ИКЦ {value}
       </Typography>
     </Box>
   );
@@ -47,11 +47,10 @@ export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
   //console.log(activeFloor); // "ИКЦ-2"
 
   const [floorsNames, setFloorNames] = React.useState([
-    { name: "ИКЦ-1", isActive: false },
-    { name: "ИКЦ 1", isActive: false },
-    { name: "ИКЦ 2", isActive: false },
-    { name: "ИКЦ-4", isActive: false },
-    { name: "ИКЦ-5", isActive: false },
+    { name: "-1", isActive: false },
+    { name: "1", isActive: false },
+    { name: "2", isActive: true },
+    { name: "3", isActive: false },
   ]);
 
   const handleActive = React.useCallback(
@@ -86,7 +85,9 @@ export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
   };
 
   React.useEffect(() => {
-    handleActiveFromSearch(activeFloor);
+    if (activeFloor) {
+      handleActiveFromSearch(activeFloor);
+    }
   }, [activeFloor]);
 
   return (

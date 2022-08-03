@@ -3,11 +3,25 @@ import Circle from "../user-circle/userCircle";
 import Badge from "@mui/material/Badge";
 import { BigCircle } from "../user-circle/userCircle";
 
+//import { useSelector } from "react-redux";
+
 const SeatsCircles = ({ areas, showUserCard }) => {
   const [isCircleVisible, setIsCircleVisible] = React.useState(false);
   const [circleInfo, setCircleInfo] = React.useState(null);
 
+  // const isCircleVisible = useSelector(
+  //   (state) => state.userCircle.isCircleVisible
+  // );
+
+  // console.log({ isCircleVisible });
+
   const mapperAreaMouseEnterHandler = async (item) => {
+    setCircleInfo({ ...item, size: 78 });
+    setIsCircleVisible(true);
+  };
+
+  const handleClickCircle = (item) => {
+    showUserCard(item);
     setCircleInfo({ ...item, size: 78 });
     setIsCircleVisible(true);
   };
@@ -31,7 +45,7 @@ const SeatsCircles = ({ areas, showUserCard }) => {
           }}
           onMouseEnter={() => mapperAreaMouseEnterHandler(item)}
           onMouseLeave={() => setIsCircleVisible(false)}
-          onClick={() => showUserCard(item.place)}
+          onClick={() => handleClickCircle(item)}
         >
           <Circle key={item.place} circleInfo={item} />
         </Badge>

@@ -33,20 +33,21 @@ const service = new Service();
 // }
 
 const Mapper = ({ imageSrc, showUserCard, floorNumber }) => {
+  console.log(floorNumber);
   const [areas, setAreas] = React.useState(null);
 
-  const getAreas = async () => {
-    const res = await service.getUsersFromFloor();
+  const getAreas = async (floorNumber) => {
+    const res = await service.getUsersFromFloor(floorNumber);
     setAreas(res);
   };
 
   React.useEffect(() => {
     let mounted = true;
     if (mounted) {
-      getAreas();
+      getAreas(floorNumber);
     }
     return () => (mounted = false);
-  }, []);
+  }, [floorNumber]);
 
   const URL = imageSrc;
   const MAP = {
@@ -67,6 +68,7 @@ const Mapper = ({ imageSrc, showUserCard, floorNumber }) => {
 };
 
 class Map extends React.Component {
+  // props  { floor: "3", name: "Андрей Тормин", place: "2A3" }
   constructor(props) {
     super(props);
     this.prismaZoom = React.createRef();
@@ -95,7 +97,7 @@ class Map extends React.Component {
   getFloor = () => {
     let floor = this.props.activeFloorFromClick
       ? this.props.activeFloorFromClick
-      : this.props.activeFloor;
+      : this.props.activeFloorAndUser?.floor;
 
     return floor ? parseInt(floor.match(/\d+/)) : 2;
   };
@@ -103,9 +105,9 @@ class Map extends React.Component {
   getImageSrc = () => {
     let img = this.props.activeFloorFromClick
       ? this.props.activeFloorFromClick
-      : this.props.activeFloor;
+      : this.props.activeFloorAndUser?.floor;
     if (!img) {
-      return "./img/ИКЦ-2.png";
+      return "./img/2.png";
     }
 
     return `./img/${img}.png`;
