@@ -48,8 +48,8 @@ export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
 
   const [floorsNames, setFloorNames] = React.useState([
     { name: "ИКЦ-1", isActive: false },
-    { name: "ИКЦ-2", isActive: false },
-    { name: "ИКЦ-3", isActive: false },
+    { name: "ИКЦ 1", isActive: false },
+    { name: "ИКЦ 2", isActive: false },
     { name: "ИКЦ-4", isActive: false },
     { name: "ИКЦ-5", isActive: false },
   ]);
