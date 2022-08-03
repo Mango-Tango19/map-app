@@ -1,0 +1,25 @@
+
+#img-mapper {
+    width: 100% !important;
+}
+
+.map {
+    overflow:scroll;
+    height: 100vh;
+    max-width: 1022px;
+} 
+
+ .map img {
+    width: 100%;
+    transition: transform 0.3s; 
+  
+}
+
+.buttons {
+    position: absolute;
+    top: 45vh;
+    right: 0em;
+    background: white;
+    border-radius: 10px;
+
+} 

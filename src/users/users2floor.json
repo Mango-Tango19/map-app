@@ -1,0 +1,40 @@
+{
+    "users2floor": [
+        {
+            "userID": "A250",
+            "name": "Котович Кот Котов",
+            "department": "Отдел Д-1",
+            "online": true,
+            "email": "super@mail.ru",
+            "phone": "122",
+            "position": "Разработчик",
+            "manager": "Боровских Илья Юрьевич",
+            "img": "https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fit=scale&fm=pjpg&h=350&w=700",
+            "project": [
+                "ТМХ-VIP "
+            ],
+            "floor_coordinate": "2A1",
+            "office": "ИКЦ-2",
+            "PC_number": "A250",
+            "monitors": 2
+        },
+        {
+            "userID": "A251",
+            "name": "Котович1 Кот1 Котов1",
+            "department": "Отдел Д-1",
+            "online": false,
+            "email": "super@mail.ru",
+            "phone": "122",
+            "position": "Разработчик",
+            "manager": "Боровских Илья Юрьевич",
+            "img": "https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?auto=compress&fit=scale&fm=pjpg&h=350&w=700",
+            "project": [
+                "ТМХ-VIP "
+            ],
+            "floor_coordinate": "2A2",
+            "office": "ИКЦ-2",
+            "PC_number": "A251",
+            "monitors": 2
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+
+{
+    "Floor2Areas" : [
+        {"place": "2A1",
+        "coords" : [56,67,11],
+        "polygon" : [[56,67,11]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A2",
+        "coords" : [86,66,12],
+        "polygon" : [[86,66,12]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A3",
+        "coords" : [132,67,12],
+        "polygon" : [ [132,67,12]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A4",
+        "coords" : [165,68,12],
+        "polygon" : [[165,68,12]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A5",
+        "coords" : [54,109,12],
+        "polygon" : [[54,109,12]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A6",
+        "coords" : [87,110,14],
+        "polygon" : [[87,110,14]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A7",
+        "coords" : [133,110,12],
+        "polygon" : [[133,110,12]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }, 
+        {"place": "2A8",
+        "coords" : [161,110,13],
+        "polygon" : [[161,110,13]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }
+    ]   
+}

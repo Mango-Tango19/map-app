@@ -1,0 +1,60 @@
+{
+    "res": [
+        {
+            "name": "Гиззатулин Азамат",
+            "place": "2A1",
+            "isOnline": true,
+            "img": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+            "userID": "123"
+        },
+        {
+            "name": "Андрей Тормин",
+            "place": "2A2",
+            "isOnline": false,
+            "img": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+            "userID": "124"
+        },
+        {
+            "name": "Андрей",
+            "place": "2A3",
+            "isOnline": false,
+            "img": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+            "userID": "125"
+        },
+        {
+            "name": "Саша",
+            "place": "2A4",
+            "isOnline": true,
+            "img": "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
+            "userID": "126"
+        },
+        {
+            "name": "Маша",
+            "place": "2A5",
+            "isOnline": true,
+            "img": "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
+            "userID": "127"
+        },
+        {
+            "name": "Даша",
+            "place": "2A6",
+            "isOnline": true,
+            "img": "https://rickandmortyapi.com/api/character/avatar/6.jpeg",
+            "userID": "127"
+        },
+        {
+            "name": "Каша",
+            "place": "2A7",
+            "isOnline": false,
+            "img": "https://rickandmortyapi.com/api/character/avatar/7.jpeg",
+            "userID": "128"
+        },
+        {
+            "name": "Паша",
+            "place": "2A8",
+            "isOnline": false,
+            "img": "https://rickandmortyapi.com/api/character/avatar/8.jpeg",
+            "userID": "129"
+        }
+    ]
+}

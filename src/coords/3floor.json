@@ -1,0 +1,13 @@
+
+{
+    "Floor3Areas" : [
+        {"title": "3A1",
+        "coords" : [56,67,11],
+        "polygon" : [[56,67,11]],
+        "shape": "circle",
+        "fillColor": "transparent",
+        "strokeColor": "rgba(0, 0, 0, 0.5)"
+        }
+
+    ]   
+}
