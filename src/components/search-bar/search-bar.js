@@ -10,15 +10,25 @@ const floorsAndPeople = [
   { floor: 3, name: "Боровских Илья", place: "2A5" },
 ];
 
-export default function SearchBar({ handleResultFromSearch, destroyCard }) {
+export default function SearchBar({
+  handleResultFromSearch,
+  destroyCard,
+  userInfo,
+}) {
   const [value, setValue] = React.useState(null);
 
   const handleSearch = (e, newValue) => {
-    //этаж должен приходить в формате  "2", "3",
+    //этаж должен приходить в формате  2, 3,
     //  debugger;
     setValue(newValue);
     handleResultFromSearch(newValue);
   };
+
+  React.useEffect(() => {
+    if (userInfo) return;
+
+    setValue(null);
+  }, [userInfo]);
 
   const defaultProps = {
     options: floorsAndPeople,

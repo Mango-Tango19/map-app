@@ -27,29 +27,6 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function UserCard({ userInfo }) {
-  debugger;
-  console.log(userInfo);
-  ///userInfo
-  //get full info from service by id
-  // coords: (3) […]
-  // ​​
-  // fillColor: "transparent"
-  // ​​
-  // img: "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-  // ​​
-  // isOnline: true
-  // ​​
-  // name: "Гиззатулин Азамат"
-  // ​​
-  // place: "2A1"
-  // ​​
-  // polygon: (1) […]
-  // ​​
-  // shape: "circle"
-  // ​​
-  // strokeColor: "rgba(0, 0, 0, 0.5)"
-  // ​​
-  // userID: "123"
   return (
     <Card
       sx={{

@@ -16,12 +16,6 @@ const service = new Service();
 const App = () => {
   const [activeFloorAndUser, setActiveFloorAndUser] = useState(null);
 
-  //const [userDataFromSearch, setUserDataFromSearch] = useState(null);
-
-  //const [activeFloorFromClick, setFloorFromClick] = useState(null);
-
-  //const [isUserVisible, setIsUserVisible] = useState(false);
-
   const [userInfo, setUserInfo] = useState(null);
 
   const getUserInfo = (id) => {
@@ -39,6 +33,7 @@ const App = () => {
 
   const saveActiveFromClick = (result) => {
     setActiveFloorAndUser(result);
+    setUserInfo(null);
   };
 
   const destroyCard = () => {
@@ -66,6 +61,7 @@ const App = () => {
               <SearchBar
                 handleResultFromSearch={handleResultFromSearch}
                 destroyCard={destroyCard}
+                userInfo={userInfo}
               />
               {userInfo ? <UserCard userInfo={userInfo} /> : <div></div>}
               <FloorBtnGroup

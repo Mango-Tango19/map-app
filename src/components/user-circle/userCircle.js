@@ -45,6 +45,7 @@ const Circle = ({ circleInfo }) => {
 };
 
 export const BigCircle = ({ circleInfo }) => {
+  //if (!circleInfo) return null;
   const left = circleInfo.coords[0] + 10;
   const top = circleInfo.coords[1] + 10;
   const radius = circleInfo.size;
