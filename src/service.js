@@ -31,15 +31,11 @@ export default class Service {
   }
 
   coordsAndUsers(floorNumber, resFromServer) {
-    debugger;
     const areas = this.getCoordinatesByFloorNumber(floorNumber);
 
-    let arr = resFromServer.map((item) => {
+    return resFromServer.map((item) => {
       return { ...item, ...areas.find((area) => area.place === item.place) };
     });
-    debugger;
-
-    return arr;
 
     // return resFromServer.map((item) => {
     //   return { ...item, ...areas.find((area) => area.place === item.place) };
@@ -85,13 +81,11 @@ export default class Service {
     // userID: "2A3"
     //let areas = this.getCoordinatesByFloorNumber(res?.floor)
 
-    debugger;
-    const floorCoordinates = this.coordsAndUsers(res?.floor, resFromServer);
+    return this.coordsAndUsers(res?.floor, resFromServer);
     //    floorCoordinates ​
 
     // const userFromSearchByCoordinates = floorCoordinates.find((item) => {
     //   return item.place === res.place;
     // });
-    return floorCoordinates;
   };
 }

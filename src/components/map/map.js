@@ -32,7 +32,7 @@ const service = new Service();
 //     ]
 // }
 
-const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser }) => {
+const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser, userInfo }) => {
   //console.log(activeFloorAndUser);
   const [areas, setAreas] = React.useState(null);
 
@@ -60,7 +60,11 @@ const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser }) => {
   } else {
     return (
       <>
-        <SeatsCircles areas={areas} showUserCard={showUserCard} />
+        <SeatsCircles
+          areas={areas}
+          showUserCard={showUserCard}
+          userInfo={userInfo}
+        />
         <ImageMapper src={URL} map={MAP} />
       </>
     );
@@ -94,19 +98,8 @@ class Map extends React.Component {
     this.prismaZoom.current.zoomIn(1);
   };
 
-  getFloor = () => {
-    debugger;
-    let floor = this.props.activeFloorFromClick
-      ? this.props.activeFloorFromClick
-      : this.props.activeFloorAndUser?.floor;
-
-    return floor ? parseInt(floor.match(/\d+/)) : 2;
-  };
-
   getImageSrc = () => {
-    let img = this.props.activeFloorFromClick
-      ? this.props.activeFloorFromClick
-      : this.props.activeFloorAndUser?.floor;
+    let img = this.props.activeFloorAndUser;
     if (!img) {
       return "./img/2.png";
     }
@@ -127,7 +120,8 @@ class Map extends React.Component {
             <Mapper
               imageSrc={this.getImageSrc()}
               showUserCard={this.props.showUserCard}
-              floorNumber={this.getFloor()}
+              floorNumber={this.props.activeFloorAndUser}
+              userInfo={this.props.userInfo}
             />
           </PrismaZoom>
         </div>

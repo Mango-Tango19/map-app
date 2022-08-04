@@ -27,6 +27,8 @@ const CustomButton = styled(Button)(({ theme }) => ({
 }));
 
 export default function UserCard({ userInfo }) {
+  debugger;
+  console.log(userInfo);
   ///userInfo
   //get full info from service by id
   // coords: (3) […]

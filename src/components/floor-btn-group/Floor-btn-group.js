@@ -47,10 +47,10 @@ export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
   //console.log(activeFloor); // "ИКЦ-2"
 
   const [floorsNames, setFloorNames] = React.useState([
-    { name: "-1", isActive: false },
-    { name: "1", isActive: false },
-    { name: "2", isActive: true },
-    { name: "3", isActive: false },
+    { name: -1, isActive: false },
+    { name: 1, isActive: false },
+    { name: 2, isActive: true },
+    { name: 3, isActive: false },
   ]);
 
   const handleActive = React.useCallback(
