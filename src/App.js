@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import Grid from "@mui/material/Grid";
 import SearchBar from "./components/search-bar/search-bar";
@@ -53,7 +53,7 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const { setUrerById, userById } = useUserInfo();
+  //const { setUrerById, userById } = useUserInfo();
 
   const getUserInfo = (id) => {
     let res = service.getUserById(id);
@@ -72,36 +72,12 @@ const App = () => {
     // userDataFromSearch { floor: "3", name: "Андрей Тормин", place: "2A3" }
     setActiveFloorAndUser(userDataFromSearch);
 
-    dispatch(actions.getUserId(userDataFromSearch.place));
+    // dispatch(actions.getUserById(userDataFromSearch.place));
   }, [userDataFromSearch]);
 
   const saveActiveFromClick = (name) => {
     setFloorFromClick(name);
   };
-
-  // const showUserCard = (id) => {
-  //   //  setIsUserVisible(true);
-  //   //getUserInfo by id
-  //   // console.log(id);
-  //   const data = {
-  //     userID: "A250",
-  //     name: id,
-  //     department: "Отдел Д-1",
-  //     online: true,
-  //     email: "super@mail.ru",
-  //     phone: "122",
-  //     position: "Разработчик",
-  //     manager: "Боровских Илья Юрьевич",
-  //     img: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-  //     project: ["ТМХ-VIP "],
-  //     floor_coordinate: "A250",
-  //     office: "ИКЦ-2",
-  //     PC_number: "A250",
-  //     monitors: 2,
-  //   };
-  //   setUserInfo(data);
-  //   //show circle from redux
-  // };
 
   const destroyCard = () => {
     setUserInfo(null);

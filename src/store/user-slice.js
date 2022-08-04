@@ -2,10 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const userCircleSlice = createSlice({
   name: "userCircleSlice",
-  initialState: { isCircleVisible: false, userData: null, userId: null },
+  initialState: {
+    isCircleVisible: false,
+    isLoading: false,
+    isError: false,
+    userData: null,
+  },
   reducers: {
-    getUserId: (state, action) => {
-      return { ...state, userId: action.payload };
+    getUserById: (state, action) => {
+      return { ...state, userData: action.payload };
     },
 
     showUserCircle: (state) => {
@@ -14,10 +19,6 @@ const userCircleSlice = createSlice({
 
     hideUserCircle: (state) => {
       return { ...state, isCircleVisible: false };
-    },
-
-    setUserData: (state, action) => {
-      return { ...state, userData: action.payload };
     },
   },
 });

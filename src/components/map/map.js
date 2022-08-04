@@ -95,6 +95,7 @@ class Map extends React.Component {
   };
 
   getFloor = () => {
+    debugger;
     let floor = this.props.activeFloorFromClick
       ? this.props.activeFloorFromClick
       : this.props.activeFloorAndUser?.floor;

@@ -31,11 +31,19 @@ export default class Service {
   }
 
   coordsAndUsers(floorNumber, resFromServer) {
+    debugger;
     const areas = this.getCoordinatesByFloorNumber(floorNumber);
 
-    return resFromServer.map((item) => {
+    let arr = resFromServer.map((item) => {
       return { ...item, ...areas.find((area) => area.place === item.place) };
     });
+    debugger;
+
+    return arr;
+
+    // return resFromServer.map((item) => {
+    //   return { ...item, ...areas.find((area) => area.place === item.place) };
+    // });
   }
 
   async getData(url, body) {
@@ -59,11 +67,8 @@ export default class Service {
   getUserById = (res) => {
     // (result);Object { floor: "3", name: "Андрей Тормин", place: "2A3" }
     // const resFromServer =  await this.getData('users/floor', {id })
-    console.log(res);
+
     const resFromServer = userInfo.res;
-    // let areas = this.getCoordinatesByFloorNumber(res?.floor)
-    const floorCoordinates = this.coordsAndUsers(res?.floor, resFromServer);
-    //    floorCoordinates ​
     // PC_number: "A250"
     // department: "Отдел Д-1"
     // email: "super@mail.ru"
@@ -78,11 +83,15 @@ export default class Service {
     // position: "Разработчик"
     // project: (1) […]
     // userID: "2A3"
+    //let areas = this.getCoordinatesByFloorNumber(res?.floor)
+
     debugger;
-    const userFromSearchByCoordinates = floorCoordinates.filter((item) => {
-      debugger;
-      return item.place === res.place;
-    });
-    return userFromSearchByCoordinates;
+    const floorCoordinates = this.coordsAndUsers(res?.floor, resFromServer);
+    //    floorCoordinates ​
+
+    // const userFromSearchByCoordinates = floorCoordinates.find((item) => {
+    //   return item.place === res.place;
+    // });
+    return floorCoordinates;
   };
 }
