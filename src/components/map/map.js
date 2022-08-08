@@ -5,9 +5,7 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import NearMeIcon from "@mui/icons-material/NearMe";
 import ImageMapper from "react-img-mapper";
-
 import PrismaZoom from "react-prismazoom";
 import LoadingIndicator from "../loading-indicator/loadingIndicator";
 
@@ -33,7 +31,7 @@ const service = new Service();
 // }
 
 const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser, userInfo }) => {
-  //console.log(activeFloorAndUser);
+  console.log(activeFloorAndUser);
   const [areas, setAreas] = React.useState(null);
 
   const getAreas = async (floorNumber) => {
@@ -44,10 +42,10 @@ const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser, userInfo }) => {
   React.useEffect(() => {
     let mounted = true;
     if (mounted) {
-      getAreas(activeFloorAndUser?.floor);
+      getAreas(activeFloorAndUser);
     }
     return () => (mounted = false);
-  }, [activeFloorAndUser?.floor]);
+  }, [activeFloorAndUser]);
 
   const URL = imageSrc;
   const MAP = {
@@ -139,9 +137,6 @@ class Map extends React.Component {
               aria-label='vertical contained button group'
               variant='text'
             >
-              <IconButton key='three'>
-                <NearMeIcon />
-              </IconButton>
               <IconButton key='one' onClick={this.onClickOnZoomIn}>
                 <ControlPointIcon />
               </IconButton>

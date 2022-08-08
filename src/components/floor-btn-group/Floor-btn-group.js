@@ -5,6 +5,8 @@ import "./floor-btn-group.css";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Typography } from "@mui/material";
 import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import HomeIcon from "@mui/icons-material/Home";
 
 const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
   return (
@@ -22,9 +24,11 @@ const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
         onClick={() => handleActiveFromClick(value)}
       >
         {isActive ? (
-          <CircleIcon sx={{ fontSize: 12 }} />
+          <CircleIcon sx={{ fontSize: 15 }} />
+        ) : value === "Дом" ? (
+          <HomeIcon sx={{ fontSize: 15 }} />
         ) : (
-          <ChangeHistoryIcon sx={{ fontSize: 12 }} />
+          <ApartmentIcon sx={{ fontSize: 15 }} />
         )}
       </Button>
       <Typography
@@ -37,7 +41,7 @@ const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
           letterSpacing: "0,5px",
         }}
       >
-        ИКЦ {value}
+        {value === "Дом" ? null : "ИКЦ"} {value}
       </Typography>
     </Box>
   );
@@ -51,6 +55,7 @@ export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
     { name: 1, isActive: false },
     { name: 2, isActive: true },
     { name: 3, isActive: false },
+    { name: "Дом", isActive: false },
   ]);
 
   const handleActive = React.useCallback(

@@ -5,6 +5,7 @@ import Floor1Areas from "./coords/1floor.json";
 
 //results from server
 import res2floor from "./serverRes/res2floor.json";
+import resHome from "./serverRes/resHome.json";
 
 //single user from server
 import userInfo from "./serverRes/userInfo.json";
@@ -50,6 +51,12 @@ export default class Service {
     }
     return await res.json();
   }
+
+  getUsersFromHome = async () => {
+    //return await this.getData('users/floor', {home})
+    const resFromServer = resHome.res;
+    return resFromServer;
+  };
 
   getUsersFromFloor = async (floorNumber = 2) => {
     //return await this.getData('users/floor', {floorNumber })
