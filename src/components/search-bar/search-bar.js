@@ -1,6 +1,8 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useDispatch } from "react-redux";
+import { floorActions } from "../../store/floor-slice";
 
 const floorsAndPeople = [
   { floor: 2, name: "Гиззатулин Азамат", place: "2A1" },
@@ -10,25 +12,18 @@ const floorsAndPeople = [
   { floor: 3, name: "Боровских Илья", place: "2A5" },
 ];
 
-export default function SearchBar({
-  handleResultFromSearch,
-  destroyCard,
-  userInfo,
-}) {
+export default function SearchBar() {
+  const dispatch = useDispatch();
+
   const [value, setValue] = React.useState(null);
 
   const handleSearch = (e, newValue) => {
     //этаж должен приходить в формате  2, 3,
     //  debugger;
     setValue(newValue);
-    handleResultFromSearch(newValue);
+    dispatch(floorActions.setCurrentFloor(newValue?.floor));
+    dispatch(floorActions.setCurrentUser(newValue?.place));
   };
-
-  React.useEffect(() => {
-    if (userInfo) return;
-
-    setValue(null);
-  }, [userInfo]);
 
   const defaultProps = {
     options: floorsAndPeople,
@@ -41,7 +36,7 @@ export default function SearchBar({
       {...defaultProps}
       value={value}
       onChange={handleSearch}
-      onFocus={() => destroyCard()}
+      // onFocus={() => destroyCard()}
       disablePortal
       renderInput={(params) => <TextField {...params} label='Фамилия/Место' />}
     />

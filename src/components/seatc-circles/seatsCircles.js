@@ -3,7 +3,7 @@ import Circle from "../user-circle/userCircle";
 import Badge from "@mui/material/Badge";
 import { BigCircle } from "../user-circle/userCircle";
 
-const SeatsCircles = ({ areas, showUserCard, userInfo }) => {
+const SeatsCircles = ({ areas }) => {
   const [isCircleVisible, setIsCircleVisible] = React.useState(false);
   const [circleInfo, setCircleInfo] = React.useState(null);
 
@@ -12,17 +12,16 @@ const SeatsCircles = ({ areas, showUserCard, userInfo }) => {
     setIsCircleVisible(true);
   };
 
-  useEffect(() => {
-    if (!userInfo) {
-      setIsCircleVisible(false);
-      return;
-    }
-    setCircleInfo({ ...userInfo, size: 78 });
-    setIsCircleVisible(true);
-  }, [userInfo]);
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     setIsCircleVisible(false);
+  //     return;
+  //   }
+  //   setCircleInfo({ ...userInfo, size: 78 });
+  //   setIsCircleVisible(true);
+  // }, [userInfo]);
 
   const handleClickCircle = (item) => {
-    showUserCard(item);
     setCircleInfo({ ...item, size: 78 });
     setIsCircleVisible(true);
   };

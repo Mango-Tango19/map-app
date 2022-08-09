@@ -3,6 +3,12 @@
     width: 100% !important;
 }
 
+.img-mapper-img {
+    position: relative !important;
+ 
+    
+} 
+
 .map {
     overflow:scroll;
     height: 100vh;
@@ -15,7 +21,7 @@
   
 }
 
-.buttons {
+.zoom-buttons {
     position: absolute;
     top: 45vh;
     right: 0em;

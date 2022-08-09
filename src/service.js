@@ -58,7 +58,7 @@ export default class Service {
     return resFromServer;
   };
 
-  getUsersFromFloor = async (floorNumber = 2) => {
+  getUsersFromFloor = async (floorNumber) => {
     //return await this.getData('users/floor', {floorNumber })
 
     const resFromServer = res2floor.res;
