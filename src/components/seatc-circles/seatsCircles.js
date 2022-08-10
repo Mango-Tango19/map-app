@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { floorActions } from "../../store/floor-slice";
 
 const SeatsCircles = ({ areas }) => {
-  debugger;
   const { userPlace } = useSelector((state) => state.floor);
   const dispatch = useDispatch();
 
@@ -37,6 +36,10 @@ const SeatsCircles = ({ areas }) => {
     setIsCircleVisible(true);
     dispatch(floorActions.setCurrentPlace(item.place));
   }, []);
+  debugger;
+  if (areas.length === 0) {
+    return null;
+  }
 
   return areas.map((item) => {
     const left = item.coords[0] - 10;

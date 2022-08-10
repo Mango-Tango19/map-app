@@ -3,6 +3,7 @@ import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import { Box } from "@mui/system";
+import { memo } from "react";
 
 const StyledBadge = styled(Badge)((props) => ({
   "& .MuiBadge-badge": {
@@ -33,7 +34,7 @@ const StyledBadge = styled(Badge)((props) => ({
   },
 }));
 
-const Circle = ({ circleInfo }) => {
+const Circle = memo(({ circleInfo }) => {
   if (!circleInfo) return null;
   return (
     <Avatar
@@ -42,9 +43,9 @@ const Circle = ({ circleInfo }) => {
       sx={{ width: 25, height: 25 }}
     />
   );
-};
+});
 
-export const BigCircle = ({ circleInfo }) => {
+export const BigCircle = memo(({ circleInfo }) => {
   const left = circleInfo?.coords[0] + 10;
   const top = circleInfo?.coords[1] + 10;
   const radius = circleInfo?.size;
@@ -66,6 +67,6 @@ export const BigCircle = ({ circleInfo }) => {
       <Chip label={circleInfo.name} color='white' />
     </Box>
   );
-};
+});
 
 export default Circle;

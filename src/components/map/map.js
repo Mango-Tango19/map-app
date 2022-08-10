@@ -23,12 +23,21 @@ import "./map.css";
 const service = new Service();
 
 const Mapper = () => {
-  // const [areas, setAreas] = React.useState(null);
   const dispatch = useDispatch();
   const { loading, error, currentFloor } = useSelector((state) => state.floor);
 
   //console.log(loading, error);
-  const [areas, setAreas] = useState(null);
+  const [areas, setAreas] = useState([]);
+  //const [imageSrc, setImageSrc] = useState(null);
+
+  // const getImageSrc = (floor) => {
+  //   setImageSrc(`./img/${floor}.png`);
+  // };
+
+  // useEffect(() => {
+  //   if (!currentFloor) return;
+  //   getImageSrc(currentFloor);
+  // }, [currentFloor]);
 
   const getAreas = useCallback(
     async (currentFloor) => {
@@ -51,7 +60,7 @@ const Mapper = () => {
     getAreas(currentFloor);
   }, [getAreas]);
 
-  const src = `./img/${currentFloor}.png`;
+  //const src = `./img/${currentFloor}.png`;
   const map = {
     name: "my-map",
     areas: areas,
@@ -65,14 +74,14 @@ const Mapper = () => {
     return <h1>Error! </h1>;
   }
 
-  if (!areas) {
-    return <LoadingIndicator />;
-  }
+  // if (!areas) {
+  //   return <LoadingIndicator />;
+  // }
 
   return (
     <>
       <SeatsCircles areas={areas} />
-      <ImageMapper src={src} map={map} />
+      <ImageMapper src={`./img/${currentFloor}.png`} map={map} />
     </>
   );
 };
