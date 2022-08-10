@@ -45,11 +45,10 @@ const Circle = ({ circleInfo }) => {
 };
 
 export const BigCircle = ({ circleInfo }) => {
-  //if (!circleInfo) return null;
-  const left = circleInfo.coords[0] + 10;
-  const top = circleInfo.coords[1] + 10;
-  const radius = circleInfo.size;
-
+  const left = circleInfo?.coords[0] + 10;
+  const top = circleInfo?.coords[1] + 10;
+  const radius = circleInfo?.size;
+  if (!circleInfo) return null;
   return (
     <Box sx={{ top: top, left: left, position: "absolute", zIndex: 9 }}>
       <StyledBadge

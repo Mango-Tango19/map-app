@@ -13,8 +13,11 @@ const floorSlice = createSlice({
     setCurrentFloor(state, action) {
       state.currentFloor = action.payload;
     },
-    setCurrentUser(state, action) {
+    setCurrentPlace(state, action) {
       state.userPlace = action.payload;
+    },
+    setCurrentUser(state, action) {
+      state.userInfo = action.payload;
     },
     performRequest(state) {
       state.loading = true;

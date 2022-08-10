@@ -9,7 +9,7 @@ const service = new Service();
 export default function HomeOffice() {
   const [homeUsers, setHomeUsers] = React.useState(null);
 
-  const getUsers = async (floorNumber) => {
+  const getUsers = async (floorNumber = 2) => {
     const res = await service.getUsersFromFloor(floorNumber);
     setHomeUsers(res);
   };
@@ -30,7 +30,7 @@ export default function HomeOffice() {
         {homeUsers.map((item) => {
           return (
             <Grid item xs={3} key={item.place}>
-              <UserCard userInfo={item} />{" "}
+              <UserCard userInfo={item} />
             </Grid>
           );
         })}

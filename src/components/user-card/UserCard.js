@@ -11,6 +11,13 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { floorActions } from "../../store/floor-slice";
+import { useState, useCallback, useEffect } from "react";
+import Service from "../../service";
+import LoadingIndicator from "../loading-indicator/loadingIndicator";
+
+const service = new Service();
 
 const CustomButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -26,7 +33,39 @@ const CustomButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function UserCard({ userInfo }) {
+export default function UserCard() {
+  const dispatch = useDispatch();
+
+  const { loading, error, userPlace, userInfo } = useSelector(
+    (state) => state.floor
+  );
+
+  const getUserData = useCallback(
+    async (userPlace) => {
+      service
+        .getUserById(userPlace)
+        .then((res) => {
+          dispatch(floorActions.requestSuccess());
+          dispatch(floorActions.setCurrentUser(res));
+        })
+        .catch((err) => {
+          dispatch(floorActions.requestError());
+          console.error(err);
+        });
+    },
+    [userPlace]
+  );
+
+  useEffect(() => {
+    if (!userPlace) return;
+    dispatch(floorActions.performRequest());
+    getUserData(userPlace);
+  }, [getUserData]);
+
+  if (!userInfo) return <div></div>;
+
+  if (loading && !error) return <LoadingIndicator />;
+
   return (
     <Card
       sx={{
@@ -59,17 +98,17 @@ export default function UserCard({ userInfo }) {
             <Typography variant='body2' component='p'>
               Руководитель
             </Typography>
-            {/* <Typography variant='body2' color='text.secondary'>
-              {userInfo?.manager}
-            </Typography> */}
+            <Typography variant='body2' color='text.secondary'>
+              {userInfo.manager}
+            </Typography>
           </Box>
           <Box>
             <Typography variant='body2' component='p'>
               Проект
             </Typography>
-            {/* <Typography variant='body2' color='text.secondary'>
-              {userInfo?.project[0]}
-            </Typography> */}
+            <Typography variant='body2' color='text.secondary'>
+              {userInfo.project[0]}
+            </Typography>
           </Box>
 
           {/* <Box>
@@ -105,22 +144,22 @@ export default function UserCard({ userInfo }) {
         </Typography> */}
 
         <Typography variant='body2' color='text.secondary' gutterBottom>
-          Почта:{" "}
-          {/* <Link
+          Почта:
+          <Link
             href={`mailto:${userInfo?.email}`}
             sx={{ display: "inline-block", marginBottom: "10px" }}
           >
-            {userInfo?.email}
-          </Link> */}
+            {userInfo.email}
+          </Link>
         </Typography>
       </CardContent>
       <CardActions>
         <CustomButton variant='outlined' size='small'>
           Профиль
         </CustomButton>
-        <CustomButton variant='outlined' size='small'>
+        {/* <CustomButton variant='outlined' size='small'>
           Показать на плане
-        </CustomButton>
+        </CustomButton> */}
       </CardActions>
     </Card>
   );

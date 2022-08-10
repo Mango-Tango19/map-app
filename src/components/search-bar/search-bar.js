@@ -7,7 +7,7 @@ import { floorActions } from "../../store/floor-slice";
 const floorsAndPeople = [
   { floor: 2, name: "Гиззатулин Азамат", place: "2A1" },
   { floor: 1, name: "Булатова Дарья", place: "2A2" },
-  { floor: 2, name: "Андрей Тормин", place: "2A3" },
+  { floor: 2, name: "Андрей Тормин", place: "2A7" },
   { floor: 3, name: "Наумова Маргарита", place: "2A4" },
   { floor: 3, name: "Боровских Илья", place: "2A5" },
 ];
@@ -22,7 +22,7 @@ export default function SearchBar() {
     //  debugger;
     setValue(newValue);
     dispatch(floorActions.setCurrentFloor(newValue?.floor));
-    dispatch(floorActions.setCurrentUser(newValue?.place));
+    dispatch(floorActions.setCurrentPlace(newValue?.place));
   };
 
   const defaultProps = {

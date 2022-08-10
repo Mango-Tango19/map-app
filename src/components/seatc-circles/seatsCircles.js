@@ -1,9 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, memo } from "react";
 import Circle from "../user-circle/userCircle";
 import Badge from "@mui/material/Badge";
 import { BigCircle } from "../user-circle/userCircle";
+import { useDispatch, useSelector } from "react-redux";
+import { floorActions } from "../../store/floor-slice";
 
 const SeatsCircles = ({ areas }) => {
+  debugger;
+  const { userPlace } = useSelector((state) => state.floor);
+  const dispatch = useDispatch();
+
   const [isCircleVisible, setIsCircleVisible] = React.useState(false);
   const [circleInfo, setCircleInfo] = React.useState(null);
 
@@ -12,19 +18,25 @@ const SeatsCircles = ({ areas }) => {
     setIsCircleVisible(true);
   };
 
-  // useEffect(() => {
-  //   if (!userInfo) {
-  //     setIsCircleVisible(false);
-  //     return;
-  //   }
-  //   setCircleInfo({ ...userInfo, size: 78 });
-  //   setIsCircleVisible(true);
-  // }, [userInfo]);
+  const getCircleInfo = useCallback(
+    (userPlace) => {
+      return areas.find((area) => area.place === userPlace);
+    },
+    [userPlace]
+  );
 
-  const handleClickCircle = (item) => {
+  useEffect(() => {
+    if (!userPlace) return;
+    let res = getCircleInfo(userPlace);
+    setCircleInfo({ ...res, size: 78 });
+    setIsCircleVisible(true);
+  }, [userPlace]);
+
+  const handleClickCircle = useCallback((item) => {
     setCircleInfo({ ...item, size: 78 });
     setIsCircleVisible(true);
-  };
+    dispatch(floorActions.setCurrentPlace(item.place));
+  }, []);
 
   return areas.map((item) => {
     const left = item.coords[0] - 10;

@@ -37,10 +37,6 @@ export default class Service {
     return resFromServer.map((item) => {
       return { ...item, ...areas.find((area) => area.place === item.place) };
     });
-
-    // return resFromServer.map((item) => {
-    //   return { ...item, ...areas.find((area) => area.place === item.place) };
-    // });
   }
 
   async getData(url, body) {
@@ -67,8 +63,11 @@ export default class Service {
 
   //get user by ID/place
 
-  getUserById = (res) => {
+  getUserById = async (place) => {
+    ///get floor by place
+
     // (result);Object { floor: "3", name: "Андрей Тормин", place: "2A3" }
+
     // const resFromServer =  await this.getData('users/floor', {id })
 
     const resFromServer = userInfo.res;
@@ -87,8 +86,10 @@ export default class Service {
     // project: (1) […]
     // userID: "2A3"
     //let areas = this.getCoordinatesByFloorNumber(res?.floor)
+    let floor = place[0];
+    let res = this.coordsAndUsers(floor, resFromServer);
+    return res[0];
 
-    return this.coordsAndUsers(res?.floor, resFromServer);
     //    floorCoordinates ​
 
     // const userFromSearchByCoordinates = floorCoordinates.find((item) => {

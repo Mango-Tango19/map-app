@@ -9,6 +9,7 @@ import ImageMapper from "react-img-mapper";
 import PrismaZoom from "react-prismazoom";
 import { floorActions } from "../../store/floor-slice";
 import LoadingIndicator from "../loading-indicator/loadingIndicator";
+import HomeOffice from "../home-office/home-office";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useState, useEffect } from "react";
@@ -21,19 +22,18 @@ import "./map.css";
 
 const service = new Service();
 
-const Mapper = ({ floorNumber }) => {
+const Mapper = () => {
   // const [areas, setAreas] = React.useState(null);
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.floor);
+  const { loading, error, currentFloor } = useSelector((state) => state.floor);
 
   //console.log(loading, error);
   const [areas, setAreas] = useState(null);
 
   const getAreas = useCallback(
-    async (floorNumber) => {
-      debugger;
+    async (currentFloor) => {
       service
-        .getUsersFromFloor(floorNumber)
+        .getUsersFromFloor(currentFloor)
         .then((res) => {
           dispatch(floorActions.requestSuccess());
           setAreas(res);
@@ -43,16 +43,15 @@ const Mapper = ({ floorNumber }) => {
           console.error(err);
         });
     },
-    [floorNumber]
+    [currentFloor]
   );
 
   useEffect(() => {
-    debugger;
-    // dispatch(floorActions.performRequest());
-    getAreas(floorNumber);
+    if (!currentFloor) return;
+    getAreas(currentFloor);
   }, [getAreas]);
 
-  const src = `./img/${floorNumber}.png`;
+  const src = `./img/${currentFloor}.png`;
   const map = {
     name: "my-map",
     areas: areas,
@@ -113,10 +112,10 @@ class Map extends React.Component {
             ref={this.prismaZoom}
           >
             <Mapper
-              // imageSrc={this.getImageSrc()}
-              // showUserCard={this.props.showUserCard}
-              floorNumber={this.props.currentFloor}
-              // userInfo={this.props.userInfo}
+            // imageSrc={this.getImageSrc()}
+            // showUserCard={this.props.showUserCard}
+            //  floorNumber={this.props.currentFloor}
+            // userInfo={this.props.userInfo}
             />
           </PrismaZoom>
         </div>
@@ -153,6 +152,10 @@ const MapWrapper = () => {
 
   if (!currentFloor) {
     return <h1>Welcome </h1>;
+  }
+
+  if (currentFloor === "Дом") {
+    return <HomeOffice />;
   }
   // const currentUser = useSelector((state) => state.floor.userPlace);
   return <Map currentFloor={currentFloor} />;

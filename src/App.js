@@ -37,24 +37,26 @@ const App = () => {
               />
               {/* {userInfo ? <UserCard userInfo={userInfo} /> : <div></div>} */}
 
+              <UserCard />
               <FloorBtnGroup
               // activeFloor={activeFloorAndUser}
               // saveActiveFromClick={saveActiveFromClick}
               />
             </Box>
           </Grid>
-          <MapWrapper />
-          {/* <Grid item xs={9}>
-            {activeFloorAndUser === "Дом" ? (
+
+          <Grid item xs={9}>
+            <MapWrapper />
+            {/* {activeFloorAndUser === "Дом" ? (
               <HomeOffice />
             ) : (
               <Map
-                // showUserCard={showUserCard}
-                // userInfo={userInfo}
-                // activeFloorAndUser={activeFloorAndUser}
+                showUserCard={showUserCard}
+                 userInfo={userInfo}
+                 activeFloorAndUser={activeFloorAndUser}
               />
-            )}
-          </Grid> */}
+            )} */}
+          </Grid>
         </Grid>
       </div>
     </ThemeProvider>
