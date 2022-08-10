@@ -19,7 +19,7 @@ import LoadingIndicator from "../loading-indicator/loadingIndicator";
 
 const service = new Service();
 
-const CustomButton = styled(Button)(({ theme }) => ({
+export const CustomButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
   padding: "10px 22px",
   borderRadius: "100px",
@@ -36,9 +36,15 @@ const CustomButton = styled(Button)(({ theme }) => ({
 export default function UserCard() {
   const dispatch = useDispatch();
 
-  const { loading, error, userPlace, userInfo } = useSelector(
-    (state) => state.floor
-  );
+  const { loading, error, userPlace } = useSelector((state) => state.floor);
+
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    img: "",
+    manager: "",
+    project: [],
+    email: "",
+  });
 
   const getUserData = useCallback(
     async (userPlace) => {
@@ -46,7 +52,8 @@ export default function UserCard() {
         .getUserById(userPlace)
         .then((res) => {
           dispatch(floorActions.requestSuccess());
-          dispatch(floorActions.setCurrentUser(res));
+          //dispatch(floorActions.setCurrentUser(res));
+          setUserInfo(res);
         })
         .catch((err) => {
           dispatch(floorActions.requestError());
@@ -58,11 +65,17 @@ export default function UserCard() {
 
   useEffect(() => {
     if (!userPlace) return;
-    dispatch(floorActions.performRequest());
-    getUserData(userPlace);
-  }, [getUserData]);
+    let isCanceled = false;
+    if (!isCanceled) {
+      dispatch(floorActions.performRequest());
+      getUserData(userPlace);
+    }
+    return () => {
+      isCanceled = true;
+    };
+  }, []);
 
-  if (!userInfo) return <div></div>;
+  if (!userInfo.name) return <div></div>;
 
   if (loading && !error) return <LoadingIndicator />;
 

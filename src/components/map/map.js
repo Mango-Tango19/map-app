@@ -57,8 +57,15 @@ const Mapper = () => {
 
   useEffect(() => {
     if (!currentFloor) return;
-    getAreas(currentFloor);
-  }, [getAreas]);
+    let mounted = false;
+
+    debugger;
+    if (!mounted) {
+      getAreas(currentFloor);
+    }
+
+    return () => (mounted = true);
+  }, []);
 
   //const src = `./img/${currentFloor}.png`;
   const map = {

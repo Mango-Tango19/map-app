@@ -32,11 +32,12 @@ const SeatsCircles = ({ areas }) => {
   }, [userPlace]);
 
   const handleClickCircle = useCallback((item) => {
-    setCircleInfo({ ...item, size: 78 });
-    setIsCircleVisible(true);
+    // setCircleInfo({ ...item, size: 78 });
+    // setIsCircleVisible(true);
+    console.log(item);
     dispatch(floorActions.setCurrentPlace(item.place));
   }, []);
-  debugger;
+
   if (areas.length === 0) {
     return null;
   }
