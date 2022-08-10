@@ -118,9 +118,9 @@ export default function UserCard({ userInfo }) {
         <CustomButton variant='outlined' size='small'>
           Профиль
         </CustomButton>
-        <CustomButton variant='outlined' size='small'>
+        {/* <CustomButton variant='outlined' size='small'>
           Показать на плане
-        </CustomButton>
+        </CustomButton> */}
       </CardActions>
     </Card>
   );
