@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const floorSlice = createSlice({
   name: "floor",
   initialState: {
-    currentFloor: null,
+    currentFloor: 2,
     userPlace: null,
     userInfo: null,
     loading: true,

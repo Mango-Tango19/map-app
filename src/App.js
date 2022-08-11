@@ -9,11 +9,6 @@ import Box from "@mui/material/Box";
 import MapWrapper from "./components/map/map";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./components/theme/theme";
-//import Service from "./service";
-import HomeOffice from "./components/home-office/home-office";
-
-//import { useCoordinates } from "./components/useCoordinates";
-//const service = new Service();
 
 const App = () => {
   return (
@@ -30,32 +25,14 @@ const App = () => {
                 rowGap: "20px",
               }}
             >
-              <SearchBar
-              // handleResultFromSearch={handleResultFromSearch}
-              // destroyCard={destroyCard}
-              // userInfo={userInfo}
-              />
-              {/* {userInfo ? <UserCard userInfo={userInfo} /> : <div></div>} */}
-
+              <SearchBar />
               <UserCard />
-              <FloorBtnGroup
-              // activeFloor={activeFloorAndUser}
-              // saveActiveFromClick={saveActiveFromClick}
-              />
+              <FloorBtnGroup />
             </Box>
           </Grid>
 
           <Grid item xs={9}>
             <MapWrapper />
-            {/* {activeFloorAndUser === "Дом" ? (
-              <HomeOffice />
-            ) : (
-              <Map
-                showUserCard={showUserCard}
-                 userInfo={userInfo}
-                 activeFloorAndUser={activeFloorAndUser}
-              />
-            )} */}
           </Grid>
         </Grid>
       </div>

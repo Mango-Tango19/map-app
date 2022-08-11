@@ -15,11 +15,13 @@ const floorsAndPeople = [
 export default function SearchBar() {
   const dispatch = useDispatch();
 
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState();
 
   const handleSearch = (e, newValue) => {
+    debugger;
     //этаж должен приходить в формате  2, 3,
     //  debugger;
+    if (!newValue) return;
     setValue(newValue);
     dispatch(floorActions.setCurrentFloor(newValue?.floor));
     dispatch(floorActions.setCurrentPlace(newValue?.place));
