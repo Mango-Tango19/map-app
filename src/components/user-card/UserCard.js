@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
 
-const CustomButton = styled(Button)(({ theme }) => ({
+export const CustomButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
   padding: "10px 22px",
   borderRadius: "100px",

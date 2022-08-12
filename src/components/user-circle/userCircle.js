@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import { Box } from "@mui/system";
 
-const StyledBadge = styled(Badge)((props) => ({
+export const StyledBadge = styled(Badge)((props) => ({
   "& .MuiBadge-badge": {
     backgroundColor: `${props.isOnline ? "#44b700" : "#f44336"}`,
     color: `${props.isOnline ? "#44b700" : "#f44336"}`,
