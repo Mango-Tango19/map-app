@@ -49,15 +49,15 @@ const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
   );
 };
 
-const initialState = [
-  { name: -1, isActive: false },
-  { name: 1, isActive: false },
-  { name: 2, isActive: false },
-  { name: 3, isActive: false },
-  { name: "Дом", isActive: false },
-];
-
 export const FloorBtnGroup = () => {
+  const initialState = [
+    { name: -1, isActive: false },
+    { name: 1, isActive: false },
+    { name: 2, isActive: false },
+    { name: 3, isActive: false },
+    { name: "Дом", isActive: false },
+  ];
+
   //console.log(activeFloor); // "ИКЦ-2"
 
   const dispatch = useDispatch();
@@ -67,10 +67,10 @@ export const FloorBtnGroup = () => {
 
   const handleActive = useCallback(
     (floorName) => {
-      let arr = [];
+      //let arr = [];
       // if (!floorName) arr = initialState;
-      if (typeof floorName === "undefined") arr = initialState;
-      arr = floorsNames.map((item) => {
+      //  if (typeof floorName === "undefined") arr = initialState;
+      let arr = floorsNames.map((item) => {
         if (floorName === item.name) {
           return {
             ...item,
@@ -94,6 +94,7 @@ export const FloorBtnGroup = () => {
   }, [currentFloor]);
 
   const handleActiveFromClick = (activeItemName) => {
+    debugger;
     handleActive(activeItemName);
     dispatch(floorActions.setCurrentFloor(activeItemName));
   };

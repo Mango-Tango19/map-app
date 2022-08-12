@@ -59,15 +59,14 @@ const Mapper = () => {
     if (!currentFloor) return;
     let mounted = false;
 
-    debugger;
     if (!mounted) {
+      debugger;
       getAreas(currentFloor);
     }
 
     return () => (mounted = true);
   }, []);
 
-  //const src = `./img/${currentFloor}.png`;
   const map = {
     name: "my-map",
     areas: areas,
@@ -127,12 +126,7 @@ class Map extends React.Component {
             onZoomChange={this.onZoomChange}
             ref={this.prismaZoom}
           >
-            <Mapper
-            // imageSrc={this.getImageSrc()}
-            // showUserCard={this.props.showUserCard}
-            //  floorNumber={this.props.currentFloor}
-            // userInfo={this.props.userInfo}
-            />
+            <Mapper />
           </PrismaZoom>
         </div>
         <div className='zoom-buttons'>

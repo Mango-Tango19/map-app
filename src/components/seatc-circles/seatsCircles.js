@@ -19,22 +19,23 @@ const SeatsCircles = ({ areas }) => {
 
   const getCircleInfo = useCallback(
     (userPlace) => {
-      return areas.find((area) => area.place === userPlace);
+      let res = areas.find((area) => area.place === userPlace);
+      setCircleInfo({ ...res, size: 78 });
     },
     [userPlace]
   );
 
   useEffect(() => {
     if (!userPlace) return;
-    let res = getCircleInfo(userPlace);
-    setCircleInfo({ ...res, size: 78 });
+
+    getCircleInfo(userPlace);
+    // if (typeof res === "undefined") return;
+    // debugger;
+
     setIsCircleVisible(true);
   }, [userPlace]);
 
   const handleClickCircle = useCallback((item) => {
-    // setCircleInfo({ ...item, size: 78 });
-    // setIsCircleVisible(true);
-    console.log(item);
     dispatch(floorActions.setCurrentPlace(item.place));
   }, []);
 
@@ -43,6 +44,8 @@ const SeatsCircles = ({ areas }) => {
   }
 
   return areas.map((item) => {
+    debugger;
+    if (typeof item === "undefined") return null;
     const left = item.coords[0] - 10;
     const top = item.coords[1] - 10;
     const color = item.isOnline ? "success" : "secondary";

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userCircleSlice = createSlice({
-  name: "userCircleSlice",
+const userCardSlice = createSlice({
+  name: "user",
   initialState: {
     isCircleVisible: false,
-    isLoading: false,
-    isError: false,
+    loading: false,
+    error: false,
     userData: null,
   },
   reducers: {
@@ -20,8 +20,18 @@ const userCircleSlice = createSlice({
     hideUserCircle: (state) => {
       return { ...state, isCircleVisible: false };
     },
+    performRequest(state) {
+      state.loading = true;
+    },
+    requestSuccess(state) {
+      state.loading = false;
+    },
+    requestError(state) {
+      state.loading = false;
+      state.error = true;
+    },
   },
 });
 
-export const actions = userCircleSlice.actions;
-export default userCircleSlice;
+export const userActions = userCardSlice.actions;
+export default userCardSlice;

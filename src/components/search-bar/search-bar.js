@@ -18,7 +18,6 @@ export default function SearchBar() {
   const [value, setValue] = React.useState();
 
   const handleSearch = (e, newValue) => {
-    debugger;
     //этаж должен приходить в формате  2, 3,
     //  debugger;
     if (!newValue) return;

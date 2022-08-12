@@ -3,17 +3,20 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Service from "../../service";
 import { CustomButton } from "../user-card/UserCard";
-import { useDispatch } from "react-redux";
-import { floorActions } from "../../store/floor-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { homeActions } from "../../store/home-slice";
 import Paper from "@mui/material/Paper";
 import { StyledBadge } from "../user-circle/userCircle";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
+import LoadingIndicator from "../loading-indicator/loadingIndicator";
 
 const service = new Service();
 
 export default function HomeOffice() {
   const [homeUsers, setHomeUsers] = React.useState(null);
+
+  const { loading, error } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
@@ -21,22 +24,26 @@ export default function HomeOffice() {
     service
       .getUsersFromFloor(floorNumber)
       .then((res) => {
-        dispatch(floorActions.requestSuccess());
+        dispatch(homeActions.requestSuccess());
         setHomeUsers(res);
       })
-      .catch((err) => dispatch(floorActions.requestError()));
+      .catch((err) => dispatch(homeActions.requestError()));
   };
 
   React.useEffect(() => {
     let mounted = false;
     if (!mounted) {
-      dispatch(floorActions.performRequest());
+      dispatch(homeActions.performRequest());
       getUsers();
     }
     return () => (mounted = true);
   }, []);
 
   if (!homeUsers) return null;
+
+  if (loading) return <LoadingIndicator />;
+
+  if (error) return <h1>Error</h1>;
 
   return (
     <Box sx={{ width: "100%", padding: "20px 10px" }}>

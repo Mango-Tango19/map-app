@@ -36,15 +36,17 @@ export const CustomButton = styled(Button)(({ theme }) => ({
 export default function UserCard() {
   const dispatch = useDispatch();
 
-  const { loading, error, userPlace } = useSelector((state) => state.floor);
+  const { userPlace } = useSelector((state) => state.floor);
 
-  const [userInfo, setUserInfo] = useState({
-    name: "",
-    img: "",
-    manager: "",
-    project: [],
-    email: "",
-  });
+  // const [userInfo, setUserInfo] = useState({
+  //   name: "",
+  //   img: "",
+  //   manager: "",
+  //   project: [],
+  //   email: "",
+  // });
+
+  const [userInfo, setUserInfo] = useState(null);
 
   const getUserData = useCallback(
     async (userPlace) => {
@@ -75,9 +77,9 @@ export default function UserCard() {
     };
   }, []);
 
-  if (!userInfo.name) return <div></div>;
+  if (!userInfo) return <div></div>;
 
-  if (loading && !error) return <LoadingIndicator />;
+  // if (loading && !error) return <LoadingIndicator />;
 
   return (
     <Card
