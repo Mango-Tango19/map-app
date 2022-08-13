@@ -4,9 +4,10 @@ import Button from "@mui/material/Button";
 import "./floor-btn-group.css";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Typography } from "@mui/material";
-import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import HomeIcon from "@mui/icons-material/Home";
+import { useContext, useEffect, useState } from "react";
+import GlobalContext from "../../context/GlobalContext";
 
 const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
   return (
@@ -47,10 +48,14 @@ const SingleBtn = ({ value, isActive, handleActiveFromClick }) => {
   );
 };
 
-export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
+export const FloorBtnGroup = () => {
+  const { currentFloor, setCurrentFloor } = useContext(GlobalContext);
+
   //console.log(activeFloor); // "ИКЦ-2"
 
-  const [floorsNames, setFloorNames] = React.useState([
+  //console.log(currentFloor); // "ИКЦ-2"
+
+  const [floorsNames, setFloorNames] = useState([
     { name: -1, isActive: false },
     { name: 1, isActive: false },
     { name: 2, isActive: true },
@@ -58,42 +63,34 @@ export const FloorBtnGroup = ({ activeFloor, saveActiveFromClick }) => {
     { name: "Дом", isActive: false },
   ]);
 
-  const handleActive = React.useCallback(
-    (floorName) => {
-      let arr = floorsNames.map((item) => {
-        if (floorName === item.name) {
-          return {
-            ...item,
-            isActive: true,
-          };
-        } else {
-          return {
-            ...item,
-            isActive: false,
-          };
-        }
-      });
+  const handleActive = (currentFloor) => {
+    let arr = floorsNames.map((item) => {
+      if (currentFloor === item.name) {
+        return {
+          ...item,
+          isActive: true,
+        };
+      } else {
+        return {
+          ...item,
+          isActive: false,
+        };
+      }
+    });
 
-      setFloorNames(arr);
-    },
-    [floorsNames]
-  );
-
-  const handleActiveFromSearch = (activeFloor) => {
-    handleActive(activeFloor);
-    saveActiveFromClick(null);
+    setFloorNames(arr);
   };
 
   const handleActiveFromClick = (activeItemName) => {
+    debugger;
     handleActive(activeItemName);
-    saveActiveFromClick(activeItemName);
+    setCurrentFloor(activeItemName);
   };
 
-  React.useEffect(() => {
-    if (activeFloor) {
-      handleActiveFromSearch(activeFloor);
-    }
-  }, [activeFloor]);
+  useEffect(() => {
+    if (!currentFloor) return;
+    handleActive(currentFloor);
+  }, [currentFloor]);
 
   return (
     <Box

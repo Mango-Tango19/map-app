@@ -67,8 +67,7 @@ export default class Service {
 
   //get user by ID/place
 
-  getUserById = (res) => {
-    // (result);Object { floor: "3", name: "Андрей Тормин", place: "2A3" }
+  getUserById = async (userPlace, floor) => {
     // const resFromServer =  await this.getData('users/floor', {id })
 
     const resFromServer = userInfo.res;
@@ -88,7 +87,8 @@ export default class Service {
     // userID: "2A3"
     //let areas = this.getCoordinatesByFloorNumber(res?.floor)
 
-    return this.coordsAndUsers(res?.floor, resFromServer);
+    return this.coordsAndUsers(floor, resFromServer);
+
     //    floorCoordinates ​
 
     // const userFromSearchByCoordinates = floorCoordinates.find((item) => {

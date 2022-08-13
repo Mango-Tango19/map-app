@@ -1,31 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Circle from "../user-circle/userCircle";
 import Badge from "@mui/material/Badge";
 import { BigCircle } from "../user-circle/userCircle";
+import LoadingIndicator from "../loading-indicator/loadingIndicator";
+import GlobalContext from "../../context/GlobalContext";
 
-const SeatsCircles = ({ areas, showUserCard, userInfo }) => {
-  const [isCircleVisible, setIsCircleVisible] = React.useState(false);
-  const [circleInfo, setCircleInfo] = React.useState(null);
+const SeatsCircles = ({ areas }) => {
+  const { userPlace, setUserPlace } = useContext(GlobalContext);
+
+  // console.log(areas);
+  const [isCircleVisible, setIsCircleVisible] = useState(false);
+  const [isClick, setIsClick] = useState(false);
+  const [circleInfo, setCircleInfo] = useState(null);
 
   const mapperAreaMouseEnterHandler = async (item) => {
     setCircleInfo({ ...item, size: 78 });
     setIsCircleVisible(true);
   };
 
+  const getCircleInfo = (userPlace) => {
+    let res = areas.find((area) => area.place === userPlace);
+    setCircleInfo({ ...res, size: 78 });
+    setIsClick(true);
+  };
+
   useEffect(() => {
-    if (!userInfo) {
-      setIsCircleVisible(false);
-      return;
-    }
-    setCircleInfo({ ...userInfo, size: 78 });
-    setIsCircleVisible(true);
-  }, [userInfo]);
+    if (userPlace === "") return;
+    getCircleInfo(userPlace);
+  }, [userPlace]);
 
   const handleClickCircle = (item) => {
-    showUserCard(item);
     setCircleInfo({ ...item, size: 78 });
-    setIsCircleVisible(true);
+    setUserPlace(item.place);
+    setIsClick(true);
   };
+
+  if (areas.length === 0) return <LoadingIndicator />;
 
   return areas.map((item) => {
     const left = item.coords[0] - 10;
@@ -48,9 +58,10 @@ const SeatsCircles = ({ areas, showUserCard, userInfo }) => {
           onMouseLeave={() => setIsCircleVisible(false)}
           onClick={() => handleClickCircle(item)}
         >
-          <Circle key={item.place} circleInfo={item} />
+          <Circle key={item.place} circleInfo={item} keyProp={item.place} />
         </Badge>
         {isCircleVisible ? <BigCircle circleInfo={circleInfo} /> : null}
+        {isClick ? <BigCircle circleInfo={circleInfo} /> : null}
       </div>
     );
   });

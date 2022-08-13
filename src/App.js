@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./App.css";
 import Grid from "@mui/material/Grid";
 import SearchBar from "./components/search-bar/search-bar";
@@ -12,41 +12,16 @@ import { theme } from "./components/theme/theme";
 import Service from "./service";
 import HomeOffice from "./components/home-office/home-office";
 
-const service = new Service();
+import GlobalContext from "./context/GlobalContext";
 
 const App = () => {
-  const [activeFloorAndUser, setActiveFloorAndUser] = useState(null);
+  // const [floor, setFloor] = useState(2);
 
-  const [userInfo, setUserInfo] = useState(null);
-
-  //const dispatch = useDispatch();
-
-  const getUserInfo = (id) => {
-    let res = service.getUserById(id);
-    setUserInfo(...res);
-  };
-
-  const handleResultFromSearch = (result) => {
-    // console.log(result);Object { floor: "3", name: "Андрей Тормин", place: "2A3" }
-    if (!result) return;
-    setActiveFloorAndUser(result.floor);
-    getUserInfo(result);
-  };
-
-  const saveActiveFromClick = (result) => {
-    debugger;
-    if (!result) return;
-    setActiveFloorAndUser(result);
-    setUserInfo(null);
-  };
-
-  const destroyCard = () => {
-    setUserInfo(null);
-  };
-
-  const showUserCard = (res) => {
-    setUserInfo(res);
-  };
+  const { currentFloor } = useContext(GlobalContext);
+  // console.log(currentFloor);
+  // useEffect(() => {
+  //   setFloor(currentFloor);
+  // }, [currentFloor]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,29 +37,13 @@ const App = () => {
                 rowGap: "20px",
               }}
             >
-              <SearchBar
-                handleResultFromSearch={handleResultFromSearch}
-                destroyCard={destroyCard}
-                userInfo={userInfo}
-              />
-              {userInfo ? <UserCard userInfo={userInfo} /> : <div></div>}
-
-              <FloorBtnGroup
-                activeFloor={activeFloorAndUser}
-                saveActiveFromClick={saveActiveFromClick}
-              />
+              <SearchBar />
+              <UserCard />
+              <FloorBtnGroup />
             </Box>
           </Grid>
           <Grid item xs={9}>
-            {activeFloorAndUser === "Дом" ? (
-              <HomeOffice />
-            ) : (
-              <Map
-                showUserCard={showUserCard}
-                userInfo={userInfo}
-                activeFloorAndUser={activeFloorAndUser}
-              />
-            )}
+            {currentFloor === "Дом" ? <HomeOffice /> : <Map />}
           </Grid>
         </Grid>
       </div>

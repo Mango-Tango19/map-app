@@ -7,10 +7,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
-import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { purple } from "@mui/material/colors";
+import { useContext, useEffect, useState } from "react";
+import GlobalContext from "../../context/GlobalContext";
+import Service from "../../service";
+import LoadingIndicator from "../loading-indicator/loadingIndicator";
+const service = new Service();
 
 export const CustomButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -26,7 +30,36 @@ export const CustomButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function UserCard({ userInfo }) {
+export default function UserCard() {
+  const { userPlace } = useContext(GlobalContext);
+
+  const [userInfo, setUserInfo] = useState(null);
+
+  const getUserData = async (userPlace, floor) => {
+    service
+      .getUserById(userPlace, floor)
+      .then((res) => {
+        setUserInfo(res[0]);
+      })
+      .catch((err) => {
+        throw Error(`got a new Error msg${err}`);
+      });
+  };
+
+  useEffect(() => {
+    let mounted = true;
+    if (userPlace === "") return;
+
+    if (mounted) {
+      let floor = +userPlace[0];
+      getUserData(userPlace, floor);
+    }
+    return () => (mounted = false);
+  }, [userPlace]);
+
+  console.log(userInfo);
+
+  if (!userInfo) return <LoadingIndicator />;
   return (
     <Card
       sx={{

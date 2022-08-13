@@ -7,6 +7,10 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import ImageMapper from "react-img-mapper";
 import PrismaZoom from "react-prismazoom";
+
+import GlobalContext from "../../context/GlobalContext";
+import { useContext, useState, useEffect, useCallback } from "react";
+
 import LoadingIndicator from "../loading-indicator/loadingIndicator";
 
 import SeatsCircles from "../seatc-circles/seatsCircles";
@@ -17,35 +21,37 @@ import "./map.css";
 
 const service = new Service();
 
-// {
-//     "areas" : [
-//         "<area target='_self' alt='2A1' title='2A1' href='2A1' coords='56,67,11' shape='circle'>",
-//         "<area target='_self' alt='2A2' title='2A2' href='2A2' coords='86,66,12' shape='circle'>",
-//         "<area target='_self' alt='2A3' title='2A3' href='2A3' coords='132,67,12' shape='circle'>",
-//         "<area target='_self' alt='2A4' title='2A4' href='2A4' coords='165,68,12' shape='circle'>",
-//         "<area target='_self' alt='2A5' title='2A5' href='2A5' coords='54,109,13' shape='circle'>",
-//         "<area target='_self' alt='2A6' title='2A6' href='2A6' coords='87,110,14' shape='circle'>",
-//         "<area target='_self' alt='2A7' title='2A7' href='2A7' coords='133,110,12' shape='circle'>",
-//         "<area target='_self' alt='2A8' title='2A8' href='2A8' coords='161,110,13' shape='circle'>"
-//     ]
-// }
+const Mapper = () => {
+  const { currentFloor } = useContext(GlobalContext);
 
-const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser, userInfo }) => {
-  console.log(activeFloorAndUser);
-  const [areas, setAreas] = React.useState(null);
+  const [imageSrc, setImageSrc] = useState("./img/2.png");
 
-  const getAreas = async (floorNumber) => {
-    const res = await service.getUsersFromFloor(floorNumber);
-    setAreas(res);
-  };
+  const [areas, setAreas] = useState([]);
 
-  React.useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      getAreas(activeFloorAndUser);
-    }
-    return () => (mounted = false);
-  }, [activeFloorAndUser]);
+  const getAreas = useCallback(
+    async (currentFloor) => {
+      service
+        .getUsersFromFloor() //обязательно передать currentFloor!!! по умолч 2
+        .then((res) => {
+          setAreas(res);
+        })
+        .catch((err) => {
+          throw Error(`new error ${err}`);
+        });
+    },
+    [currentFloor]
+  );
+
+  useEffect(() => {
+    if (currentFloor === "Дом") return;
+    setImageSrc(`./img/${currentFloor}.png`);
+  }, [currentFloor]);
+
+  useEffect(() => {
+    if (currentFloor === "Дом") return;
+
+    getAreas(currentFloor);
+  }, [currentFloor]);
 
   const URL = imageSrc;
   const MAP = {
@@ -53,20 +59,12 @@ const Mapper = ({ imageSrc, showUserCard, activeFloorAndUser, userInfo }) => {
     areas: areas,
   };
 
-  if (!areas) {
-    return <LoadingIndicator />;
-  } else {
-    return (
-      <>
-        <SeatsCircles
-          areas={areas}
-          showUserCard={showUserCard}
-          userInfo={userInfo}
-        />
-        <ImageMapper src={URL} map={MAP} />
-      </>
-    );
-  }
+  return (
+    <>
+      <SeatsCircles areas={areas} />
+      <ImageMapper src={URL} map={MAP} />
+    </>
+  );
 };
 
 class Map extends React.Component {
@@ -78,9 +76,6 @@ class Map extends React.Component {
       zoom: 1,
       allowZoom: true,
       allowPan: true,
-      floor: null,
-      alt: "",
-      src: "",
     };
   }
 
@@ -96,15 +91,6 @@ class Map extends React.Component {
     this.prismaZoom.current.zoomIn(1);
   };
 
-  getImageSrc = () => {
-    let img = this.props.activeFloorAndUser;
-    if (!img) {
-      return "./img/2.png";
-    }
-
-    return `./img/${img}.png`;
-  };
-
   render() {
     return (
       <div className='map-wrapper'>
@@ -115,12 +101,7 @@ class Map extends React.Component {
             onZoomChange={this.onZoomChange}
             ref={this.prismaZoom}
           >
-            <Mapper
-              imageSrc={this.getImageSrc()}
-              showUserCard={this.props.showUserCard}
-              floorNumber={this.props.activeFloorAndUser}
-              userInfo={this.props.userInfo}
-            />
+            <Mapper />
           </PrismaZoom>
         </div>
         <div className='buttons'>

@@ -33,14 +33,6 @@ export default function HomeOffice() {
   return (
     <Box sx={{ width: "100%", padding: "20px 10px" }}>
       <Grid container rowSpacing={4} columnSpacing={4}>
-        {/* {homeUsers.map((item) => {
-            debugger;
-            return (
-              <Grid item xs={3} key={item.place}>
-                <UserCard userInfo={item} />
-              </Grid>
-            );
-          })} */}
         {homeUsers.map((item) => {
           return (
             <Grid key={item.place} item>
