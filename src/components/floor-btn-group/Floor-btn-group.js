@@ -82,7 +82,6 @@ export const FloorBtnGroup = () => {
   };
 
   const handleActiveFromClick = (activeItemName) => {
-    debugger;
     handleActive(activeItemName);
     setCurrentFloor(activeItemName);
   };

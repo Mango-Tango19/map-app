@@ -45,7 +45,11 @@ const Circle = ({ circleInfo }) => {
 };
 
 export const BigCircle = ({ circleInfo }) => {
-  //if (!circleInfo) return null;
+  if (!circleInfo) return null;
+  ///undefined - потому что не у всех есть координаты и приходит толко размер
+  // if (typeof circleInfo.coords === "undefined") {
+  //   return null;
+  // }
   const left = circleInfo.coords[0] + 10;
   const top = circleInfo.coords[1] + 10;
   const radius = circleInfo.size;

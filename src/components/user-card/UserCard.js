@@ -57,9 +57,9 @@ export default function UserCard() {
     return () => (mounted = false);
   }, [userPlace]);
 
-  console.log(userInfo);
+  //if (!userInfo) return <LoadingIndicator />;
+  if (!userInfo) return <div></div>;
 
-  if (!userInfo) return <LoadingIndicator />;
   return (
     <Card
       sx={{
